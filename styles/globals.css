@@ -1,0 +1,32 @@
+html,
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #F1F1F1;
+	color: #121113;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	/* font-size: 16px; */
+   height: 100%; /*setting this explicitly is important*/
+  }
+body {    display: flex; /*flex superpowers activated! */ 
+	   flex-direction: column; /*Stack the flex-items (main and footer elements) vertically NOT horizontally*/ 
+ } 
+ :root {
+	--background-color-dark: #eef3f6;
+	--background-color-light: white;
+	 --box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+ }
+
+* {
+	box-sizing: border-box;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.thumbnail {
+    margin-right: 0.3rem;
+}
