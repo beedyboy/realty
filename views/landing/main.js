@@ -21,6 +21,7 @@ import location from "../../ng.json";
 import { observer } from "mobx-react";
 import { useMobxStores } from "../../stores/stores";
 import NormalCard from "../../components/Card/NormalCard";
+import { useRouter } from "next/router";
 
 const Main = () => {
   const { productStore } = useMobxStores();
@@ -28,8 +29,7 @@ const Main = () => {
   React.useEffect(() => {
     findLatest();
   }, []);
-
-  const [category, setCategory] = React.useState("buy");
+ 
   const [showSuggestions, setShowSuggestions] = React.useState(false);
   const [suggestions, setSuggestions] = React.useState([]);
   const [formState, setFormState] = React.useState({
@@ -114,6 +114,18 @@ const Main = () => {
   };
   const searchProperty = e => {
     e.preventDefault();
+    const query = {
+      isSaleOrRent: formState.values.isSaleOrRent
+    }
+    if ( formState.values.location) {
+      query.location = formState.values.location;
+  }
+    if ( formState.values.propertyType) {
+      query.propertyType = formState.values.propertyType;
+  }
+  console.log({query});
+  const router = useRouter();
+  // router.push(`/property/${query}`)
   }
   return (
     <>
@@ -206,8 +218,10 @@ const Main = () => {
                   placeholder="Select Type"
                   onChange={handleChange}
                 >
+                  <option value="Houses">Houses</option>
+                  <option value="Land">Land</option>
                   <option value="Flat">Flat</option>
-                  <option value="Bungalow">Bungalow</option>
+                  <option value="Commercial">Commercial Property</option> 
                 </Select>
               </FormControl>
 
@@ -231,6 +245,7 @@ const Main = () => {
                 colorScheme="teal"
                 icon={<MdSearch />}
                 mt={12}
+                onClick={searchProperty}
               />
             </Flex>
           </Container>
