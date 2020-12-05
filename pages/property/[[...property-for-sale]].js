@@ -1,25 +1,9 @@
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
-    List,
-    ListItem,
-    ListIcon,
+import { 
     Box,
-    Text,
-    Heading,
+    Text, 
     Skeleton,
-    Flex,
-    Center,
-    Stack,
-    Image,
-    Container,
-    Spacer,
+    Flex, 
+    Container, 
   } from "@chakra-ui/react";
   import React, { useEffect, useState } from "react";
   import { useMobxStores } from "../../stores/stores"; 
