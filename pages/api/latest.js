@@ -1,7 +1,7 @@
  import nextConnect from 'next-connect'; 
 import Property from "./models/Property"; 
 import dotenv from "dotenv";
-import helper from './utils/helper'; 
+// import helper from './utils/helper'; 
 import dbConnect from './utils/dbConnect';  
 const handler = nextConnect();
  
