@@ -5,6 +5,7 @@ import { getStores, StoreProvider } from "../stores/stores";
 import { ChakraProvider } from "@chakra-ui/react";
 import "../styles/globals.css";
 import "../styles/typeahead.css";
+import 'font-awesome/css/font-awesome.min.css'; 
 import "react-notifications/lib/notifications.css";
 import customTheme from "../utils/customTheme";
 import { NotificationContainer } from "react-notifications";

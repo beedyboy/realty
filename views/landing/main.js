@@ -6,8 +6,7 @@ import {
   Flex,
   ButtonGroup,
   Button,
-  Skeleton,
-  Image,
+  Skeleton, 
   FormControl,
   FormLabel,
   Select,
@@ -26,10 +25,11 @@ import { useRouter } from "next/router";
 const Main = () => {
   const { productStore } = useMobxStores();
   const { findLatest, loading, latest } = productStore;
+  const router = useRouter();
   React.useEffect(() => {
     findLatest();
   }, []);
- 
+
   const [showSuggestions, setShowSuggestions] = React.useState(false);
   const [suggestions, setSuggestions] = React.useState([]);
   const [formState, setFormState] = React.useState({
@@ -66,7 +66,7 @@ const Main = () => {
       ...formState,
       values: {
         ...formState.values,
-        location: suggestion.city,
+        location: suggestion.city.toLowerCase(),
       },
     }));
     setSuggestions([]);
@@ -98,7 +98,7 @@ const Main = () => {
       ...formState,
       values: {
         ...formState.values,
-       isSaleOrRent: val,
+        isSaleOrRent: val,
       },
     }));
   };
@@ -112,24 +112,32 @@ const Main = () => {
       },
     }));
   };
-  const searchProperty = e => {
+  const searchProperty = (e) => {
     e.preventDefault();
+    let url = "";
     const query = {
-      isSaleOrRent: formState.values.isSaleOrRent
-    }
-    if ( formState.values.location) {
+      category: formState.values.isSaleOrRent,
+    };
+    if (formState.values.location) {
       query.location = formState.values.location;
-  }
-    if ( formState.values.propertyType) {
-      query.propertyType = formState.values.propertyType;
-  }
-  console.log({query});
-  const router = useRouter();
-  // router.push(`/property/${query}`)
-  }
+    }
+    if (formState.values.propertyType) {
+      query.property_type = formState.values.propertyType;
+    }
+    Object.keys(query).forEach(function (key) {
+      if(key === 'category') {
+       url += query[key] === 'buy'? 'for-sale?' : 'for-rent?'; 
+      } else {
+        url += key + "=" + query[key] + "&";
+      }
+     
+    }); 
+    url = url.slice(0, -1);
+    // console.log(url);
+    router.push(`/property/${url}`)
+  };
   return (
     <>
-    
       <Box
         height={["auto", "35rem"]}
         pt={["5rem", "7rem"]}
@@ -170,7 +178,7 @@ const Main = () => {
           mx="auto"
           borderRadius="5px"
           mb="3rem"
-		  data-aos="zoom-out"
+          data-aos="zoom-out"
         >
           <ButtonGroup
             size="lg"
@@ -181,7 +189,9 @@ const Main = () => {
             <Button
               onClick={(e) => handleCategory("buy")}
               bg={formState.values.isSaleOrRent === "buy" ? "#99C5CE" : "white"}
-              colorScheme={formState.values.isSaleOrRent === "buy" ? "white" : "#99C5CE"}
+              colorScheme={
+                formState.values.isSaleOrRent === "buy" ? "white" : "#99C5CE"
+              }
               borderBottomLeftRadius="none"
             >
               Buy
@@ -189,8 +199,12 @@ const Main = () => {
 
             <Button
               onClick={(e) => handleCategory("rent")}
-              bg={formState.values.isSaleOrRent === "rent" ? "#99C5CE" : "white"}
-              colorScheme={formState.values.isSaleOrRent === "rent" ? "white" : "#99C5CE"}
+              bg={
+                formState.values.isSaleOrRent === "rent" ? "#99C5CE" : "white"
+              }
+              colorScheme={
+                formState.values.isSaleOrRent === "rent" ? "white" : "#99C5CE"
+              }
               borderRightRadius="none"
             >
               Rent
@@ -218,10 +232,10 @@ const Main = () => {
                   placeholder="Select Type"
                   onChange={handleChange}
                 >
-                  <option value="Houses">Houses</option>
-                  <option value="Land">Land</option>
-                  <option value="Flat">Flat</option>
-                  <option value="Commercial">Commercial Property</option> 
+                  <option value="house">Houses</option>
+                  <option value="land">Land</option>
+                  <option value="flat">Flat</option>
+                  <option value="commercial">Commercial Property</option>
                 </Select>
               </FormControl>
 
@@ -265,34 +279,35 @@ const Main = () => {
           <Skeleton isLoaded={!loading}>
             <SimpleGrid columns={{ sm: 1, md: 2, xl: 2 }} spacing="10px">
               {latest &&
-                latest.map((property) => <NormalCard key={property._id} data={property} />)}
+                latest.map((property) => (
+                  <NormalCard key={property._id} data={property} />
+                ))}
             </SimpleGrid>
           </Skeleton>
         </Container>
       </Box>
-      <Box
-        pt={["1.5rem", "2rem"]}
-        h="5rem"
-        backgroundColor="#99C5CE" 
-      >
-       <Container display="flex">
-	   <Flex justify="space-between">
-          <Text fontSize={["15px", "15px", "15px", "16px"]} fontStyle="italic">
-            Do you have property to sell or put up for rent ?
-          </Text>
-          <Button
-            fontSize={["15px", "15px", "15px", "16px"]} 
-            borderRadius="7px"
-            color="#E73131"
-            backgroundColor="#fff"
-            border="2px solid #E73131"
-			_hover={{ backgroundColor: "#ffffff" }}
-			data-aos="slide-left" 
-          >
-           Advertise with us
-          </Button>
-        </Flex>
-	   </Container>
+      <Box pt={["1.5rem", "2rem"]} h="5rem" backgroundColor="#99C5CE">
+        <Container display="flex">
+          <Flex justify="space-between">
+            <Text
+              fontSize={["15px", "15px", "15px", "16px"]}
+              fontStyle="italic"
+            >
+              Do you have property to sell or put up for rent ?
+            </Text>
+            <Button
+              fontSize={["15px", "15px", "15px", "16px"]}
+              borderRadius="7px"
+              color="#E73131"
+              backgroundColor="#fff"
+              border="2px solid #E73131"
+              _hover={{ backgroundColor: "#ffffff" }}
+              data-aos="slide-left"
+            >
+              Advertise with us
+            </Button>
+          </Flex>
+        </Container>
       </Box>
     </>
   );

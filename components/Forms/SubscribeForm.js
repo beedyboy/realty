@@ -24,7 +24,7 @@ const SubscribeForm = () => {
           Receive alerts when we have new properties available 
         </Text>
           <Container maxW="xl">
-     <Flex  justifyContent="space-around">
+     <Flex p={6} justifyContent="space-around">
           <Box>
           <FormControl>
             <Input type="text" name="name" placeholder="Enter your name" />

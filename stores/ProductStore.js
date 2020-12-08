@@ -16,6 +16,7 @@ class ProductStore {
   @observable latest = [];
   @observable product = [];
   @observable sales = [];
+  @observable rents = [];
 
   @action toggleClose = () => {
     this.close = false;
@@ -136,6 +137,56 @@ class ProductStore {
     }
   };
 
+  
+  @action getSales = (formData) => {
+    try {
+      this.loading = true;
+      api
+        .post("search", formData)
+        .then((res) => {
+          this.loading = false;
+          if (res.data.success === true) {
+            this.sales = res.data.data;
+          } 
+        })
+        .catch((err) => {
+          console.log("getSales", err.code);
+          console.log("getSales", err.message);
+          console.log("getSales", err.stack);
+        });
+    } catch (err) {
+      if (err.response.status === 500) {
+        console.log("There was a problem with the server");
+      } else {
+        console.log(err.response.data.msg);
+      }
+    }
+  };
+  
+  @action getRent = (formData) => {
+    try {
+      this.loading = true;
+      api
+        .post("search", formData)
+        .then((res) => {
+          this.loading = false;
+          if (res.data.success === true) {
+            this.rents = res.data.data;
+          } 
+        })
+        .catch((err) => {
+          console.log("getRent", err.code);
+          console.log("getRent", err.message);
+          console.log("getRent", err.stack);
+        });
+    } catch (err) {
+      if (err.response.status === 500) {
+        console.log("There was a problem with the server");
+      } else {
+        console.log(err.response.data.msg);
+      }
+    }
+  };
   @action toggleProduct = (data) => {
     api.post("admin/toggle", data).then((res) => {
       if (res.data.status === 200) {

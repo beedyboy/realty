@@ -58,6 +58,7 @@
     "react-multi-carousel": "^2.5.5",
     "react-notifications": "^1.7.2",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-responsive-carousel": "^3.2.11",
     "react-scroll-to-bottom": "*",
     "react-table": "^7.6.2",
     "short-id": "^0.1.0-1",

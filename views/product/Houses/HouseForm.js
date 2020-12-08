@@ -98,6 +98,17 @@ const HouseForm = ({ isOpen, onClose, mode, initial_data }) => {
           title: data && initial_data.title,
           city: data && initial_data.city,
           numOfBathRooms: data && initial_data.numOfBathRooms,
+          numOfBedRooms: data && initial_data.numOfBedRooms,
+          isSaleOrRent: data && initial_data.isSaleOrRent,
+          propertyType: data && initial_data.propertyType,
+          numOfGarages: data && initial_data.numOfGarages,
+          petsAllowed: data && initial_data.petsAllowed,
+          category: data && initial_data.category,
+          furnished: data && initial_data.furnished,
+          description: data && initial_data.description,
+          serviced: data && initial_data.serviced,
+          shared: data && initial_data.shared,
+          price: data && initial_data.price,
         },
       }));
     }

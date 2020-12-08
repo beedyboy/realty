@@ -16,9 +16,12 @@ const NormalCard = ({ data }) => {
       case 'house':
          return (
          <>
-           <IconButton icon={<MdRoom />} size="sm" /> {data.numOfBedRooms} Bedrooms
+         <i className="fa fa-bed"></i> {data.numOfBedRooms}
+         <i className="fa fa-bathtub"></i> {data.numOfBathRooms}
+         <i className="fa fa-car"></i> {data.numOfGarages}
+           {/* <IconButton icon={<MdRoom />} size="sm" /> {data.numOfBedRooms} Bedrooms
             <IconButton icon={<GiHomeGarage />} size="sm" /> {data.numOfBathRooms} Bathrooms
-            <IconButton icon={<GiHomeGarage />} size="sm" /> {data.numOfGarages} Garages
+            <IconButton icon={<GiHomeGarage />} size="sm" /> {data.numOfGarages} Garages */}
       </>
          )
         break;

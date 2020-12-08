@@ -32,7 +32,7 @@ import UAParser from "ua-parser-js";
 // import { isMobile } from 'react-device-detect';
 import { observer } from "mobx-react";
 import { MdChevronRight, MdCheckCircle } from "react-icons/md";
-import SubscribeForm from "../../components/NewsLetter/SubscribeForm";
+import SubscribeForm from "../../components/Forms/SubscribeForm";
 import PerfectScrollBar from "react-perfect-scrollbar";
 
 const responsive = {
